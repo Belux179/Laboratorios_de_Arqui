@@ -1,0 +1,117 @@
+MPASM  5.30.01                  INTENTOFINAL.ASM   9-13-2020  2:23:54         PAGE  1
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+Warning[205]: Found directive in column 1. (LIST)
+                      00001 LIST P=16F877A
+Warning[205]: Found directive in column 1. (RADIX)
+                      00002 RADIX HEX       
+                      00003 
+  00000000            00004 W EQU 0X00
+  00000003            00005 ESTADO  EQU 0X03
+  00000086            00006 TRISB   EQU 0X86
+  00000006            00007 PUERTAB EQU 0X06
+  00000022            00008 CONTA2  EQU 0X22
+  00000021            00009 CONTA1  EQU     0X21
+  00000020            00010 CONTA0  EQU     0X20
+                      00011 
+Warning[205]: Found directive in column 1. (ORG)
+0000                  00012 ORG 0X00
+Warning[203]: Found opcode in column 1. (BSF)
+0000   1683           00013 BSF     ESTADO, 5
+Warning[203]: Found opcode in column 1. (CLRF)
+Message[302]: Register in operand not in bank 0.  Ensure that bank bits are correct.
+0001   0186           00014 CLRF    TRISB
+Warning[203]: Found opcode in column 1. (BCF)
+0002   1283           00015 BCF     ESTADO, 5
+Warning[203]: Found opcode in column 1. (CLRF)
+0003   0186           00016 CLRF    PUERTAB
+                      00017 
+0004                  00018 CICLO   
+0004   3080           00019         MOVLW B'10000000'
+0005   0086           00020         MOVWF PUERTAB
+0006   201D           00021         CALL  RETARDO
+0007   3040           00022         MOVLW B'01000000'
+0008   0086           00023         MOVWF PUERTAB
+0009   201D           00024         CALL  RETARDO
+000A   3020           00025         MOVLW B'00100000'
+000B   0086           00026         MOVWF PUERTAB
+000C   201D           00027         CALL  RETARDO
+000D   3010           00028         MOVLW B'00010000'
+000E   0086           00029         MOVWF PUERTAB
+000F   201D           00030         CALL  RETARDO
+0010   3008           00031         MOVLW B'00001000'
+0011   0086           00032         MOVWF PUERTAB
+0012   201D           00033         CALL  RETARDO
+0013   3004           00034         MOVLW B'00000100'
+0014   0086           00035         MOVWF PUERTAB
+0015   201D           00036         CALL  RETARDO
+0016   3002           00037         MOVLW B'00000010'
+0017   0086           00038         MOVWF PUERTAB
+0018   201D           00039         CALL  RETARDO
+0019   3001           00040         MOVLW B'00000001'
+001A   0086           00041         MOVWF PUERTAB
+001B   201D           00042         CALL  RETARDO
+Warning[203]: Found opcode in column 1. (GOTO)
+001C   2804           00043 GOTO    CICLO
+                      00044 ;Subrutinas de retardo de 1 Segundo
+MPASM  5.30.01                  INTENTOFINAL.ASM   9-13-2020  2:23:54         PAGE  2
+
+
+LOC  OBJECT CODE     LINE SOURCE TEXT
+  VALUE
+
+001D   3021           00045 RETARDO MOVLW   0X21
+001E   00A2           00046                 MOVWF   CONTA2
+001F   3064           00047 RETA2   MOVLW   0X64
+0020   00A1           00048                 MOVWF   CONTA1
+0021   3064           00049 RETA1   MOVLW   0X64
+0022   00A0           00050                 MOVWF   CONTA0
+0023   0BA0           00051 RETA0   DECFSZ  CONTA0,1
+0024   2823           00052                 GOTO    RETA0
+0025   0BA1           00053                 DECFSZ  CONTA1,1
+0026   2821           00054                 GOTO    RETA1
+0027   0BA2           00055                 DECFSZ  CONTA2,1
+0028   281F           00056                 GOTO    RETA2
+0029   0008           00057                 RETURN
+                      00058 
+Warning[205]: Found directive in column 1. (END)
+                      00059 END
+MPASM  5.30.01                  INTENTOFINAL.ASM   9-13-2020  2:23:54         PAGE  3
+
+
+SYMBOL TABLE
+  LABEL                             VALUE 
+
+CICLO                             00000004
+CONTA0                            00000020
+CONTA1                            00000021
+CONTA2                            00000022
+ESTADO                            00000003
+PUERTAB                           00000006
+RETA0                             00000023
+RETA1                             00000021
+RETA2                             0000001F
+RETARDO                           0000001D
+TRISB                             00000086
+W                                 00000000
+__16F877A                         00000001
+
+
+MEMORY USAGE MAP ('X' = Used,  '-' = Unused)
+
+0000 : XXXXXXXXXXXXXXXX XXXXXXXXXXXXXXXX XXXXXXXXXX------ ----------------
+
+All other memory blocks unused.
+
+Program Memory Words Used:    42
+Program Memory Words Free:  8150
+
+
+Errors   :     0
+Warnings :     9 reported,     0 suppressed
+Messages :     1 reported,     0 suppressed
+
+
